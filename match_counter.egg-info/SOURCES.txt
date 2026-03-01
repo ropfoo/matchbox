@@ -1,0 +1,9 @@
+README.md
+setup.py
+match_counter.egg-info/PKG-INFO
+match_counter.egg-info/SOURCES.txt
+match_counter.egg-info/dependency_links.txt
+match_counter.egg-info/entry_points.txt
+match_counter.egg-info/top_level.txt
+src/__init__.py
+src/__main__.py

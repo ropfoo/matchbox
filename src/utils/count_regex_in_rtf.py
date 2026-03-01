@@ -1,5 +1,4 @@
-import re
-
+from .count_regex import count_regex
 from ..model.count_result import CountResult
 
 
@@ -11,12 +10,4 @@ def count_regex_in_rtf(regex, rtf_file) -> CountResult:
     with open(rtf_file, 'r') as file:
         raw_content = file.read()
 
-    compile_regex = re.compile(regex)
-
-    matches = compile_regex.findall(raw_content)
-
-    result = CountResult(count=len(matches), matches=matches)
-
-    print(result)
-
-    return result
+    return count_regex(regex, raw_content)

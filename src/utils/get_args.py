@@ -5,10 +5,10 @@ from src.model.args import Args
 
 def get_args() -> Args:
     parser = argparse.ArgumentParser(
-        description="Count regex occurrences in an RTF file."
+        description="Count regex occurrences in an RTF or PDF file."
     )
 
-    parser.add_argument("file", help="Path to the RTF file")
+    parser.add_argument("file", help="Path to the RTF or PDF file")
 
     parser.add_argument("pattern", help="Regex pattern to search for")
 
