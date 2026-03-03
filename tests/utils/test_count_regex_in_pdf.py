@@ -53,5 +53,22 @@ class TestCountRegexInPdf(unittest.TestCase):
         self.assertEqual(result['match_counts'], expected_result['match_counts'])
         self.assertEqual(result['unique_count'], expected_result['unique_count'])
 
+    @patch("logging.getLogger")
+    @patch("src.utils.count_regex_in_pdf.PdfReader")
+    def test_count_regex_in_pdf_suppresses_logging(self, mock_pdf_reader, mock_get_logger):
+        mock_logger = MagicMock()
+        mock_get_logger.return_value = mock_logger
+        
+        mock_page = MagicMock()
+        mock_page.extract_text.return_value = "test"
+        mock_pdf_reader.return_value.pages = [mock_page]
+        
+        count_regex_in_pdf("test", "dummy.pdf")
+        
+        mock_get_logger.assert_called_once_with("pypdf")
+        mock_logger.setLevel.assert_called_once()
+        import logging
+        mock_logger.setLevel.assert_called_with(logging.ERROR)
+
 if __name__ == '__main__':
     unittest.main()
