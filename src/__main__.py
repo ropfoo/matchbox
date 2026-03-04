@@ -2,27 +2,21 @@ import re
 import sys
 import os
 
-from src.utils.count_regex_in_rtf import count_regex_in_rtf
 from src.utils.count_regex_in_pdf import count_regex_in_pdf
+from src.utils.count_regex_in_rtf import count_regex_in_rtf
 from src.utils.get_args import get_args
 
 
-
 def main():
-
     args = get_args()
-
     file_path = args.get('file')
-
     pattern = args.get('pattern')
 
     try:
-        ext = os.path.splitext(file_path)[1].lower()
-        if ext == '.pdf':
-            result = count_regex_in_pdf(pattern, file_path)
-        else:
-            # Default to RTF or assume it's a text-like file (existing behavior for RTF)
+        if os.path.splitext(file_path)[1].lower() == '.rtf':
             result = count_regex_in_rtf(pattern, file_path)
+        else:
+            result = count_regex_in_pdf(pattern, file_path)
     except FileNotFoundError:
         print(f"Error: File not found: {file_path}")
         sys.exit(1)
@@ -38,6 +32,7 @@ def main():
     print("-" * 20)
     print(f"Unique Matches: {result['unique_count']}")
     print(f"Total Matches:  {result['count']}\n")
+
 
 if __name__ == "__main__":
     main()

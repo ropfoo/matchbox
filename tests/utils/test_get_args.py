@@ -14,6 +14,22 @@ class TestGetArgs(unittest.TestCase):
             self.assertEqual(args["file"], "test.rtf")
             self.assertEqual(args["pattern"], "hello")
 
+    def test_get_args_with_pattern_option(self):
+        """Test get_args with --pattern option."""
+        test_args = ["prog", "test.rtf", "--pattern", "hello"]
+        with patch.object(sys, 'argv', test_args):
+            args = get_args()
+            self.assertEqual(args["file"], "test.rtf")
+            self.assertEqual(args["pattern"], "hello")
+
+    def test_get_args_with_positional_and_pattern_option(self):
+        """Test get_args with both positional and --pattern option (option should win)."""
+        test_args = ["prog", "test.rtf", "positional", "--pattern", "option"]
+        with patch.object(sys, 'argv', test_args):
+            args = get_args()
+            self.assertEqual(args["file"], "test.rtf")
+            self.assertEqual(args["pattern"], "option")
+
     def test_get_args_missing_pattern(self):
         """Test get_args with missing pattern argument (should exit)."""
         test_args = ["prog", "test.rtf"]

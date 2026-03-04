@@ -5,9 +5,6 @@ from src.model.count_result import CountResult
 
 
 def count_regex(regex, text):
-    if regex.startswith('/') and regex.endswith('/') and len(regex) > 1:
-        regex = regex[1:-1]
-
     compile_regex = re.compile(regex, re.MULTILINE)
     matches = compile_regex.findall(text)
 

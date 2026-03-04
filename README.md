@@ -1,71 +1,32 @@
-# Match Counter
+# Matchbox
 
-A Python utility to count occurrences of a regular expression pattern in an RTF or PDF file.
-
-## Features
-
-- Count regex pattern matches in RTF and PDF files.
-- Simple CLI interface.
-- Installable as a system command.
-
-## Prerequisites
-
-- Python 3.x
+Count occurrences of a regex pattern in PDF or RTF files.
 
 ## Usage
 
-The utility can be used in several ways:
-
-### 1. Installed CLI Tool (Recommended)
-
-After installing (see [Installation](#installation) below), you can run it directly:
-
 ```bash
-match-counter data/test-data.rtf "Hello"
-# or
-match-counter data/Bonv2017f.pdf "study"
+matchbox data/file.pdf --pattern '^\d{4}$'
 ```
 
-### 2. As a Module
-
-From the project root directory:
+Or as a module from the project root:
 
 ```bash
-python3 -m src data/test-data.rtf "Hello"
+python3 -m src data/file.pdf --pattern '^\d{4}$'
 ```
 
-### 3. Directly Executing the Script
+RTF files are also supported — the file type is detected by extension:
 
 ```bash
-PYTHONPATH=. python3 ./src/__main__.py data/test-data.rtf "Hello"
+matchbox data/file.rtf --pattern '\d{4}'
 ```
 
 ## Installation
 
-### From Source
-
-Install the utility as a CLI tool from the project root:
-
-```bash
-pip install .
-```
-
-For development (editable mode):
 ```bash
 pip install -e .
 ```
 
-## Options
-
-Run with `--help` to see all available arguments:
-
-```bash
-python3 -m src --help
-```
-
 ## Running Tests
-
-To run all unit tests, use the following command:
 
 ```bash
 python3 -m unittest discover tests
