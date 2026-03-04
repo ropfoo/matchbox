@@ -1,2 +1,0 @@
-[console_scripts]
-match-counter = src.__main__:main
